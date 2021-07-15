@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block header %}
+    <h1 class="display-5 font-weight-normal">Pets</h1>
+{% endblock %}
+
+{% block content %}
+<br>
+<div class="row">
+{% for pet in pets %}
+    <div class="col-md-4">
+    {% if pet.photo_url == None %}
+        {% if pet.available == True %}
+            <a href='/{{pet.id}}'><span class="text-info">{{pet.name}}</span></a> is <b>available!</b>
+        {% else %}
+            <a href='/{{pet.id}}'><span class="text-info">{{pet.name}}</span></a> is unavailable.
+        {% endif %}
+    {% else %}
+        {% if pet.available == True %}
+            <img src="{{pet.photo_url}}" alt="photo"><br>
+            <a href='/{{pet.id}}'><span class="text-info">{{pet.name}}</span></a> is <b>available!</b>
+        {% else %}
+            <img src="{{pet.photo_url}}" alt="photo"><br>
+            <a href='/{{pet.id}}'><span class="text-info">{{pet.name}}</span></a> is unavailable.
+        {% endif %}
+    {% endif %}
+    </div>
+{% endfor %}
+</div>
+<br>
+<a href="/add">
+    <button type="button">Add a Pet</button>
+</a>
+{% endblock %}
+
+<!-- tried aligning text with no picture to bottom, didn't work -->
+
+

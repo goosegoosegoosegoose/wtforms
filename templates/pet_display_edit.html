@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}{{pet.name}}{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% if pet.photo_url == None %}
+    <div class="col-md-12">
+        <h1>{{pet.name}}</h1><br>
+        <div>Species: {{pet.species}}</div>
+        <div>Age: {{pet.age}}</div>
+    </div>
+    {% else %}
+    <div class="col-md-12">
+        <img src="{{pet.photo_url}}" alt="photo">
+        <h1>{{pet.name}}</h1><br>
+        <div>Species: {{pet.species.capitalize()}}</div>
+        <div>Age: {{pet.age}}</div>
+    </div>
+    {% endif %}
+</div>
+
+<div> 
+    <form action="/{{pet.id}}" method="POST">
+        {{form.hidden_tag()}}
+        <div class="form-group">
+            <div class="col-md-4">
+            {{form.photo_url.label}}:
+            {{form.photo_url}}
+            <small class="form-text text-danger">{{form.photo_url.error}}</small>
+            <br>
+            {{form.notes.label}}:
+            {{form.notes}}
+            <small class="form-text text-danger">{{form.notes.error}}</small>
+        </div>
+            {{form.available.label}}
+            {{form.available}}
+            <small class="form-text text-danger">{{form.available.error}}</small>
+        </div>
+        <br>
+        <a href='/'>
+            <button type="button" class="btn btn-danger">Back</button>
+        </a>
+        <button type="submit" class="btn btn-primary">Edit pet</button>
+    </form>
+</div>
+{% endblock %}
